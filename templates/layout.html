@@ -14,7 +14,7 @@
         <!-- https://favicon.io/emoji-favicons/money-mouth-face/ -->
         <!--link href="/static/favicon.ico" rel="icon"-->
 
-        <link href="/static/styles.css" rel="stylesheet">
+        <link href="/css/styles.css" rel="stylesheet">
 
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
@@ -65,7 +65,24 @@
             {% block main %}{% endblock %}
         </main>
 
-        <footer class="small text-center text-muted">
+        <br><br><br><br><br><br><br><br><br>
+        <footer>
+            <script type="text/javascript">
+                function display_c() {
+                var refresh=1000; // Refresh rate in milli seconds
+                mytime = setTimeout('display_ct()',refresh);
+                }
+
+                function display_ct() {
+                    var x = new Date().toUTCString();
+                    document.getElementById('ct').innerHTML = x;
+                    display_c();
+                }
+            </script>
+            <body onload=display_ct();>
+                <span id="ct"></span>
+            </body>
+            <br>
             Data provided for free by <a href="https://iextrading.com/developer">IEX</a>. View <a href="https://iextrading.com/api-exhibit-a/">IEX’s Terms of Use</a>.
         </footer>
 

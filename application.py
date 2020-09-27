@@ -38,6 +38,9 @@ Session(app)
 # Configure CS50 Library to use SQLite database
 db = SQL("sqlite:///finance.db")
 
+# Set API key
+os.environ["API_KEY"] = "pk_bb9e227ccfea42b190b016abc27f7996"
+
 # Make sure API key is set
 if not os.environ.get("API_KEY"):
     raise RuntimeError("API_KEY not set")
@@ -83,7 +86,7 @@ def register():
             return apology("password must match", 403)
 
         # Check if password has required conditions
-        if not check_pswd(password):
+        if check_pswd(password):
             return apology("""password must be at least 8 characters with 1 lowercase letter,
                 1 uppercase letter, and 1 digit/special character""", 403)
 
@@ -198,11 +201,6 @@ def index():
 
         stocks_data.append(data)
 
-
-
-
-
-
     # Get cash and total values for user
     cash = db.execute("SELECT cash FROM users WHERE id=:user_id", user_id=user_id)
     cash = cash[0].get("cash")
@@ -211,8 +209,7 @@ def index():
     total = usd(total)
 
     # Display table
-    return render_template("index.html", stocks_data=stocks_data, cash=cash, total=total)
-
+    return render_template("index_quote.html", stocks_data=stocks_data, cash=cash, total=total)
 
 
 @app.route("/quote", methods=["GET", "POST"])
